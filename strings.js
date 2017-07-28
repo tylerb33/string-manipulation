@@ -7,45 +7,52 @@ let userInput = document.getElementById("input");
 let button = document.getElementById("submitButton");
 let reversedWord;
 
-function reversal(testString) {
-	reversedWord = testString.split("").reverse().join("");
+function reversal(userString) {
+	reversedWord = userString.split("").reverse().join("");
 	reverseOutput.innerHTML = `<p>${reversedWord}</p>`;
 	// console.log ("reversedWord", reversedWord);
 }
 
-function alphabits(testString) {
-	let alphabetized = testString.split("").sort().join("");
+function alphabits(userString) {
+	let alphabetized = userString.split("").sort().join("");
 	alphaOutput.innerHTML = `<p>${alphabetized}</p>`;
 	// console.log ("alphabetized", alphabetized);
 }
 
-function palindrome(testString) {
-	if (reversedWord === testString) {
+function palindrome(userString) {
+	if (reversedWord === userString) {
 		palindromeOutput.innerHTML = `<p>Your word is a palindrome!</p>`;
-		// event.preventDefault();
 	}else {
 		palindromeOutput.innerHTML = `<p>Damn, your word is not a palindrome. Try another!</p>`;
-		// event.preventDefault();
 	};
-
 }
 
-var testString = "";
+function checkLetters()  {
+      var letters = /^[A-Za-z]+$/;  
+      if(userInput.value.match(letters)) {   
+      getInput();
+      return true;  
+      }else {  
+      alert('Please input alphabet characters only');  
+      return false;  
+      }  
+}
+
 
 function getInput() {
-	let testString = userInput.value;
-	reversal(testString);
-	alphabits(testString);
-	palindrome(testString);
+	let userString = userInput.value;
+	reversal(userString);
+	alphabits(userString);
+	palindrome(userString);
 	
-
 }
 
 
-button.addEventListener("click", getInput);
+button.addEventListener("click", checkLetters);
 userInput.addEventListener("keyup", function(event) {
+	console.log ("event", event);
 	if (event.which === 13) {
-	getInput();	
+	checkLetters();
 	};
 });
 
